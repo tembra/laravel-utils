@@ -12,9 +12,9 @@ class MyHasMany
     protected $relations = [];
 
     /**
-     * Obtém o relacionamento de determinada classe.
+     * Método construtor da classe.
      *
-     * @param  array  $relations
+     * @param array $relations
      *
      * @return void
      */
@@ -26,7 +26,7 @@ class MyHasMany
     /**
      * Obtém o relacionamento de determinada classe.
      *
-     * @param  string  $class
+     * @param string $class
      *
      * @return string|null
      */
@@ -38,9 +38,9 @@ class MyHasMany
     /**
      * Cria uma quantidade randômica de relacionamentos recursivamente.
      *
-     * @param  string  $class
-     * @param  \Illuminate\Database\Eloquent\Model  $obj
-     * @param  \Illuminate\Database\Eloquent\Model  $relObj
+     * @param string                              $class
+     * @param \Illuminate\Database\Eloquent\Model $obj
+     * @param \Illuminate\Database\Eloquent\Model $relObj
      *
      * @return void
      */
@@ -65,7 +65,7 @@ class MyHasMany
         $max = $all->count();
         $qtd = mt_rand(1, $max);
         // para cara um
-        for ($i=0; $i < $qtd; $i++) {
+        for ($i = 0; $i < $qtd; $i++) {
             // obtém um registro aleatório
             // adiciona no array de objetos
             // remove da lista dos registros

@@ -28,7 +28,7 @@ trait HashidsTrait
     protected $hashidsConfig = [
         'salt' => '',
         'length' => '',
-        'alphabet' => ''
+        'alphabet' => '',
     ];
 
     /**
@@ -74,7 +74,8 @@ trait HashidsTrait
         foreach ($decode as $index => $value) {
             $ret .= $value;
         }
-        return $ret ? : null;
+
+        return $ret ?: null;
     }
 
     /**
@@ -88,6 +89,7 @@ trait HashidsTrait
     public function decodeHashidsWithType($id, $type)
     {
         $salt = str_replace('resource', $type, env('HASHIDS_SALT'));
+
         return $this->decodeHashidsWithSalt($id, $salt);
     }
 
@@ -106,7 +108,7 @@ trait HashidsTrait
         // e inicializa um novo hashids
         $this->oldHashids = $this->hashids;
         $this->hashidsConfig = [
-            'salt' => $salt
+            'salt' => $salt,
         ];
         $this->hashids();
 
@@ -115,7 +117,8 @@ trait HashidsTrait
         // e retorna a decodificação
         $ret = $this->decodeHashids($id);
         $this->hashids = $this->oldHashids;
-        return $ret ? : null;
+
+        return $ret ?: null;
     }
 
     /**
@@ -129,6 +132,7 @@ trait HashidsTrait
     public function encodeHashidsWithType($id, $type)
     {
         $salt = str_replace('resource', $type, env('HASHIDS_SALT'));
+
         return $this->encodeHashidsWithSalt($id, $salt);
     }
 
@@ -147,7 +151,7 @@ trait HashidsTrait
         // e inicializa um novo hashids
         $this->oldHashids = $this->hashids;
         $this->hashidsConfig = [
-            'salt' => $salt
+            'salt' => $salt,
         ];
         $this->hashids();
 
@@ -156,6 +160,7 @@ trait HashidsTrait
         // e retorna a decodificação
         $ret = $this->encodeHashids($id);
         $this->hashids = $this->oldHashids;
+
         return $ret;
     }
 
@@ -170,12 +175,14 @@ trait HashidsTrait
     {
         // obtém o valor da key através da configuração do ambiente
         $value = env('HASHIDS_'.strtoupper($key));
+        
         // se a key já existir na configuração do hashid, despreza o valor do ambiente e utiliza o já existente
         if (array_key_exists($key, $this->hashidsConfig)) {
             if ($this->hashidsConfig[$key]) {
                 $value = $this->hashidsConfig[$key];
             }
         }
+
         return $value;
     }
 }

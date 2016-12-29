@@ -2,8 +2,8 @@
 
 namespace Mytdt\Testing;
 
-use PHPUnit_Framework_Assert as Assertion;
 use Illuminate\Support\Facades\Validator;
+use PHPUnit_Framework_Assert as Assertion;
 
 trait TestTrait
 {
@@ -33,7 +33,7 @@ trait TestTrait
     }
 
     /**
-     * Get validation rules and run validator
+     * Get validation rules and run validator.
      *
      * @param array $rules
      * @param array $resourceData

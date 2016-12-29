@@ -9,11 +9,12 @@
 |
 */
 
-if (! function_exists('public_path')) {
+if (!function_exists('public_path')) {
     /**
      * Get the path to the public folder.
      *
-     * @param  string  $path
+     * @param string $path
+     * 
      * @return string
      */
     function public_path($path = '')
@@ -22,15 +23,16 @@ if (! function_exists('public_path')) {
     }
 }
 
-if (! function_exists('elixir')) {
+if (!function_exists('elixir')) {
     /**
      * Get the path to a versioned Elixir file.
      *
-     * @param  string  $file
-     * @param  string  $buildDirectory
-     * @return string
-     *
+     * @param string $file
+     * @param string $buildDirectory
+     * 
      * @throws \InvalidArgumentException
+     * 
+     * @return string
      */
     function elixir($file, $buildDirectory = 'build')
     {
@@ -47,21 +49,23 @@ if (! function_exists('elixir')) {
     }
 }
 
-if (! function_exists('auth0_avatar')) {
+if (!function_exists('auth0_avatar')) {
     /**
      * Get the path of auth0 avatar.
      *
-     * @param  string  $text
+     * @param string $text
+     * 
      * @return string
      */
     function auth0_avatar($text)
     {
         $twoLetters = remove_accents(mb_strtolower(mb_substr($text, 0, 2)));
+
         return 'http://cdn.auth0.com/avatars/'.$twoLetters.'.png';
     }
 }
 
-if (! function_exists('get_locale')) {
+if (!function_exists('get_locale')) {
     /**
      * Return the environment locale.
      * Missing function for WordPress functions below.
@@ -84,7 +88,7 @@ if (! function_exists('get_locale')) {
 |
 */
 
-if (! function_exists('mbstring_binary_safe_encoding')) {
+if (!function_exists('mbstring_binary_safe_encoding')) {
     /**
      * Set the mbstring internal encoding to a binary safe encoding when func_overload
      * is enabled.
@@ -102,7 +106,6 @@ if (! function_exists('mbstring_binary_safe_encoding')) {
      * of `reset_mbstring_encoding()` calls.
      *
      * @since 3.7.0
-     *
      * @see reset_mbstring_encoding()
      *
      * @staticvar array $encodings
@@ -113,7 +116,7 @@ if (! function_exists('mbstring_binary_safe_encoding')) {
      */
     function mbstring_binary_safe_encoding($reset = false)
     {
-        static $encodings = array();
+        static $encodings = [];
         static $overloaded = null;
 
         if (is_null($overloaded)) {
@@ -124,7 +127,7 @@ if (! function_exists('mbstring_binary_safe_encoding')) {
             return;
         }
 
-        if (! $reset) {
+        if (!$reset) {
             $encoding = mb_internal_encoding();
             array_push($encodings, $encoding);
             mb_internal_encoding('ISO-8859-1');
@@ -137,12 +140,11 @@ if (! function_exists('mbstring_binary_safe_encoding')) {
     }
 }
 
-if (! function_exists('reset_mbstring_encoding')) {
+if (!function_exists('reset_mbstring_encoding')) {
     /**
      * Reset the mbstring internal encoding to a users previously set encoding.
      *
      * @see mbstring_binary_safe_encoding()
-     *
      * @since 3.7.0
      */
     function reset_mbstring_encoding()
@@ -151,7 +153,7 @@ if (! function_exists('reset_mbstring_encoding')) {
     }
 }
 
-if (! function_exists('seems_utf8')) {
+if (!function_exists('seems_utf8')) {
     /**
      * Checks to see if a string is utf8 encoded.
      *
@@ -159,9 +161,11 @@ if (! function_exists('seems_utf8')) {
      *       has Bytes Sequences with a maximum length of 4.
      *
      * @author bmorel at ssi dot fr (modified)
+     * 
      * @since 1.2.1
      *
      * @param string $str The string to be checked
+     * 
      * @return bool True if $str fits a UTF-8 model, false otherwise.
      */
     function seems_utf8($str)
@@ -169,30 +173,30 @@ if (! function_exists('seems_utf8')) {
         mbstring_binary_safe_encoding();
         $length = strlen($str);
         reset_mbstring_encoding();
-        for ($i=0; $i < $length; $i++) {
+        for ($i = 0; $i < $length; $i++) {
             $c = ord($str[$i]);
             if ($c < 0x80) {
                 $n = 0;
             } // 0bbbbbbb
             elseif (($c & 0xE0) == 0xC0) {
-                $n=1;
+                $n = 1;
             } // 110bbbbb
             elseif (($c & 0xF0) == 0xE0) {
-                $n=2;
+                $n = 2;
             } // 1110bbbb
             elseif (($c & 0xF8) == 0xF0) {
-                $n=3;
+                $n = 3;
             } // 11110bbb
             elseif (($c & 0xFC) == 0xF8) {
-                $n=4;
+                $n = 4;
             } // 111110bb
             elseif (($c & 0xFE) == 0xFC) {
-                $n=5;
+                $n = 5;
             } // 1111110b
             else {
                 return false;
             } // Does not match any model
-            for ($j=0; $j<$n; $j++) { // n bytes matching 10bbbbbb follow ?
+            for ($j = 0; $j < $n; $j++) { // n bytes matching 10bbbbbb follow ?
                 if ((++$i == $length) || ((ord($str[$i]) & 0xC0) != 0x80)) {
                     return false;
                 }
@@ -202,7 +206,7 @@ if (! function_exists('seems_utf8')) {
     }
 }
 
-if (! function_exists('remove_accents')) {
+if (!function_exists('remove_accents')) {
     /**
      * Converts all accent characters to ASCII characters.
      *
@@ -578,6 +582,7 @@ if (! function_exists('remove_accents')) {
      * @since 4.6.0 Added locale support for `de_CH`, `de_CH_informal`, and `ca`.
      *
      * @param string $string Text that might have accent characters
+     * 
      * @return string Filtered string with replaced "nice" characters.
      */
     function remove_accents($string)
@@ -587,13 +592,13 @@ if (! function_exists('remove_accents')) {
         }
 
         if (seems_utf8($string)) {
-            $chars = array(
+            $chars = [
             // Decompositions for Latin-1 Supplement
             chr(194).chr(170) => 'a', chr(194).chr(186) => 'o',
             chr(195).chr(128) => 'A', chr(195).chr(129) => 'A',
             chr(195).chr(130) => 'A', chr(195).chr(131) => 'A',
             chr(195).chr(132) => 'A', chr(195).chr(133) => 'A',
-            chr(195).chr(134) => 'AE',chr(195).chr(135) => 'C',
+            chr(195).chr(134) => 'AE', chr(195).chr(135) => 'C',
             chr(195).chr(136) => 'E', chr(195).chr(137) => 'E',
             chr(195).chr(138) => 'E', chr(195).chr(139) => 'E',
             chr(195).chr(140) => 'I', chr(195).chr(141) => 'I',
@@ -604,11 +609,11 @@ if (! function_exists('remove_accents')) {
             chr(195).chr(150) => 'O', chr(195).chr(153) => 'U',
             chr(195).chr(154) => 'U', chr(195).chr(155) => 'U',
             chr(195).chr(156) => 'U', chr(195).chr(157) => 'Y',
-            chr(195).chr(158) => 'TH',chr(195).chr(159) => 's',
+            chr(195).chr(158) => 'TH', chr(195).chr(159) => 's',
             chr(195).chr(160) => 'a', chr(195).chr(161) => 'a',
             chr(195).chr(162) => 'a', chr(195).chr(163) => 'a',
             chr(195).chr(164) => 'a', chr(195).chr(165) => 'a',
-            chr(195).chr(166) => 'ae',chr(195).chr(167) => 'c',
+            chr(195).chr(166) => 'ae', chr(195).chr(167) => 'c',
             chr(195).chr(168) => 'e', chr(195).chr(169) => 'e',
             chr(195).chr(170) => 'e', chr(195).chr(171) => 'e',
             chr(195).chr(172) => 'i', chr(195).chr(173) => 'i',
@@ -647,7 +652,7 @@ if (! function_exists('remove_accents')) {
             chr(196).chr(172) => 'I', chr(196).chr(173) => 'i',
             chr(196).chr(174) => 'I', chr(196).chr(175) => 'i',
             chr(196).chr(176) => 'I', chr(196).chr(177) => 'i',
-            chr(196).chr(178) => 'IJ',chr(196).chr(179) => 'ij',
+            chr(196).chr(178) => 'IJ', chr(196).chr(179) => 'ij',
             chr(196).chr(180) => 'J', chr(196).chr(181) => 'j',
             chr(196).chr(182) => 'K', chr(196).chr(183) => 'k',
             chr(196).chr(184) => 'k', chr(196).chr(185) => 'L',
@@ -663,13 +668,13 @@ if (! function_exists('remove_accents')) {
             chr(197).chr(140) => 'O', chr(197).chr(141) => 'o',
             chr(197).chr(142) => 'O', chr(197).chr(143) => 'o',
             chr(197).chr(144) => 'O', chr(197).chr(145) => 'o',
-            chr(197).chr(146) => 'OE',chr(197).chr(147) => 'oe',
-            chr(197).chr(148) => 'R',chr(197).chr(149) => 'r',
-            chr(197).chr(150) => 'R',chr(197).chr(151) => 'r',
-            chr(197).chr(152) => 'R',chr(197).chr(153) => 'r',
-            chr(197).chr(154) => 'S',chr(197).chr(155) => 's',
-            chr(197).chr(156) => 'S',chr(197).chr(157) => 's',
-            chr(197).chr(158) => 'S',chr(197).chr(159) => 's',
+            chr(197).chr(146) => 'OE', chr(197).chr(147) => 'oe',
+            chr(197).chr(148) => 'R', chr(197).chr(149) => 'r',
+            chr(197).chr(150) => 'R', chr(197).chr(151) => 'r',
+            chr(197).chr(152) => 'R', chr(197).chr(153) => 'r',
+            chr(197).chr(154) => 'S', chr(197).chr(155) => 's',
+            chr(197).chr(156) => 'S', chr(197).chr(157) => 's',
+            chr(197).chr(158) => 'S', chr(197).chr(159) => 's',
             chr(197).chr(160) => 'S', chr(197).chr(161) => 's',
             chr(197).chr(162) => 'T', chr(197).chr(163) => 't',
             chr(197).chr(164) => 'T', chr(197).chr(165) => 't',
@@ -761,33 +766,33 @@ if (! function_exists('remove_accents')) {
             chr(199).chr(153) => 'U', chr(199).chr(154) => 'u',
             // grave accent
             chr(199).chr(155) => 'U', chr(199).chr(156) => 'u',
-            );
+            ];
 
             // Used for locale-specific rules
             $locale = get_locale();
 
             if ('de_DE' == $locale || 'de_DE_formal' == $locale || 'de_CH' == $locale || 'de_CH_informal' == $locale) {
-                $chars[ chr(195).chr(132) ] = 'Ae';
-                $chars[ chr(195).chr(164) ] = 'ae';
-                $chars[ chr(195).chr(150) ] = 'Oe';
-                $chars[ chr(195).chr(182) ] = 'oe';
-                $chars[ chr(195).chr(156) ] = 'Ue';
-                $chars[ chr(195).chr(188) ] = 'ue';
-                $chars[ chr(195).chr(159) ] = 'ss';
+                $chars[chr(195).chr(132)] = 'Ae';
+                $chars[chr(195).chr(164)] = 'ae';
+                $chars[chr(195).chr(150)] = 'Oe';
+                $chars[chr(195).chr(182)] = 'oe';
+                $chars[chr(195).chr(156)] = 'Ue';
+                $chars[chr(195).chr(188)] = 'ue';
+                $chars[chr(195).chr(159)] = 'ss';
             } elseif ('da_DK' === $locale) {
-                $chars[ chr(195).chr(134) ] = 'Ae';
-                $chars[ chr(195).chr(166) ] = 'ae';
-                $chars[ chr(195).chr(152) ] = 'Oe';
-                $chars[ chr(195).chr(184) ] = 'oe';
-                $chars[ chr(195).chr(133) ] = 'Aa';
-                $chars[ chr(195).chr(165) ] = 'aa';
+                $chars[chr(195).chr(134)] = 'Ae';
+                $chars[chr(195).chr(166)] = 'ae';
+                $chars[chr(195).chr(152)] = 'Oe';
+                $chars[chr(195).chr(184)] = 'oe';
+                $chars[chr(195).chr(133)] = 'Aa';
+                $chars[chr(195).chr(165)] = 'aa';
             } elseif ('ca' === $locale) {
-                $chars[ chr(108).chr(194).chr(183).chr(108) ] = 'll';
+                $chars[chr(108).chr(194).chr(183).chr(108)] = 'll';
             }
 
             $string = strtr($string, $chars);
         } else {
-            $chars = array();
+            $chars = [];
             // Assume ISO-8859-1 if not UTF-8
             $chars['in'] = chr(128).chr(131).chr(138).chr(142).chr(154).chr(158)
                 .chr(159).chr(162).chr(165).chr(181).chr(192).chr(193).chr(194)
@@ -800,12 +805,12 @@ if (! function_exists('remove_accents')) {
                 .chr(244).chr(245).chr(246).chr(248).chr(249).chr(250).chr(251)
                 .chr(252).chr(253).chr(255);
 
-            $chars['out'] = "EfSZszYcYuAAAAAACEEEEIIIINOOOOOOUUUUYaaaaaaceeeeiiiinoooooouuuuyy";
+            $chars['out'] = 'EfSZszYcYuAAAAAACEEEEIIIINOOOOOOUUUUYaaaaaaceeeeiiiinoooooouuuuyy';
 
             $string = strtr($string, $chars['in'], $chars['out']);
-            $double_chars = array();
-            $double_chars['in'] = array(chr(140), chr(156), chr(198), chr(208), chr(222), chr(223), chr(230), chr(240), chr(254));
-            $double_chars['out'] = array('OE', 'oe', 'AE', 'DH', 'TH', 'ss', 'ae', 'dh', 'th');
+            $double_chars = [];
+            $double_chars['in'] = [chr(140), chr(156), chr(198), chr(208), chr(222), chr(223), chr(230), chr(240), chr(254)];
+            $double_chars['out'] = ['OE', 'oe', 'AE', 'DH', 'TH', 'ss', 'ae', 'dh', 'th'];
             $string = str_replace($double_chars['in'], $double_chars['out'], $string);
         }
 
