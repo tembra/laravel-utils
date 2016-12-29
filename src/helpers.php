@@ -202,6 +202,7 @@ if (!function_exists('seems_utf8')) {
                 }
             }
         }
+
         return true;
     }
 }
