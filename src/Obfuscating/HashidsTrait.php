@@ -26,8 +26,8 @@ trait HashidsTrait
      * @var array
      */
     protected $hashidsConfig = [
-        'salt' => '',
-        'length' => '',
+        'salt'     => '',
+        'length'   => '',
         'alphabet' => '',
     ];
 
@@ -175,7 +175,7 @@ trait HashidsTrait
     {
         // obtém o valor da key através da configuração do ambiente
         $value = env('HASHIDS_'.strtoupper($key));
-        
+
         // se a key já existir na configuração do hashid, despreza o valor do ambiente e utiliza o já existente
         if (array_key_exists($key, $this->hashidsConfig)) {
             if ($this->hashidsConfig[$key]) {

@@ -8,12 +8,12 @@ trait MyJoinTableTrait
      * Efetua join na query com os dados informados.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string $table
-     * @param string $one
-     * @param string $operator
-     * @param string $two
-     * @param string $type
-     * @param string $where
+     * @param string                                $table
+     * @param string                                $one
+     * @param string                                $operator
+     * @param string                                $two
+     * @param string                                $type
+     * @param string                                $where
      *
      * @return \Illuminate\Database\Query\Builder
      */

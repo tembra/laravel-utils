@@ -14,7 +14,7 @@ if (!function_exists('public_path')) {
      * Get the path to the public folder.
      *
      * @param string $path
-     * 
+     *
      * @return string
      */
     function public_path($path = '')
@@ -29,9 +29,9 @@ if (!function_exists('elixir')) {
      *
      * @param string $file
      * @param string $buildDirectory
-     * 
+     *
      * @throws \InvalidArgumentException
-     * 
+     *
      * @return string
      */
     function elixir($file, $buildDirectory = 'build')
@@ -54,7 +54,7 @@ if (!function_exists('auth0_avatar')) {
      * Get the path of auth0 avatar.
      *
      * @param string $text
-     * 
+     *
      * @return string
      */
     function auth0_avatar($text)
@@ -161,11 +161,11 @@ if (!function_exists('seems_utf8')) {
      *       has Bytes Sequences with a maximum length of 4.
      *
      * @author bmorel at ssi dot fr (modified)
-     * 
+     *
      * @since 1.2.1
      *
      * @param string $str The string to be checked
-     * 
+     *
      * @return bool True if $str fits a UTF-8 model, false otherwise.
      */
     function seems_utf8($str)
@@ -582,7 +582,7 @@ if (!function_exists('remove_accents')) {
      * @since 4.6.0 Added locale support for `de_CH`, `de_CH_informal`, and `ca`.
      *
      * @param string $string Text that might have accent characters
-     * 
+     *
      * @return string Filtered string with replaced "nice" characters.
      */
     function remove_accents($string)
