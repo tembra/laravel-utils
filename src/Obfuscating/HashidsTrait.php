@@ -8,21 +8,21 @@ trait HashidsTrait
 {
     /**
      * Instância do objeto Hashids para obfuscação do ID.
-     * 
+     *
      * @var \Vinkla\Hashids\HashidsManager
      */
     protected $hashids;
 
     /**
      * Instância anterior do objeto Hashids.
-     * 
+     *
      * @var \Vinkla\Hashids\HashidsManager
      */
     protected $oldHashids;
 
     /**
      * Configuração do Hashids.
-     * 
+     *
      * @var array
      */
     protected $hashidsConfig = [
@@ -48,23 +48,25 @@ trait HashidsTrait
 
     /**
      * Obfusca o valor informado em um Hashids.
-     * 
-     * @param mixed $id 
-     * 
+     *
+     * @param mixed $id
+     *
      * @return string
      */
-    public function encodeHashids($id) {
+    public function encodeHashids($id)
+    {
         return $this->hashids->encode($id);
     }
 
     /**
      * Decodifica o Hashids informado.
-     * 
-     * @param string $id 
-     * 
+     *
+     * @param string $id
+     *
      * @return int|null
      */
-    public function decodeHashids($id) {
+    public function decodeHashids($id)
+    {
         // decodifica o código
         // concatena o array de retorno para formar uma string
         $ret = '';
@@ -77,26 +79,28 @@ trait HashidsTrait
 
     /**
      * Decodifica o Hashids informado de acordo com o tipo do recurso.
-     * 
-     * @param string $id 
-     * @param string $type 
-     * 
+     *
+     * @param string $id
+     * @param string $type
+     *
      * @return int|null
      */
-    public function decodeHashidsWithType($id, $type) {
+    public function decodeHashidsWithType($id, $type)
+    {
         $salt = str_replace('resource', $type, env('HASHIDS_SALT'));
         return $this->decodeHashidsWithSalt($id, $salt);
     }
 
     /**
      * Decodifica o Hashids informado de acordo com determinado salt.
-     * 
-     * @param string $id 
-     * @param string $salt 
-     * 
+     *
+     * @param string $id
+     * @param string $salt
+     *
      * @return int|null
      */
-    public function decodeHashidsWithSalt($id, $salt) {
+    public function decodeHashidsWithSalt($id, $salt)
+    {
         // salva hashids atual
         // modifica o salt
         // e inicializa um novo hashids
@@ -116,26 +120,28 @@ trait HashidsTrait
 
     /**
      * Codifica o Hashids informado de acordo com o tipo do recurso.
-     * 
-     * @param string $id 
-     * @param string $type 
-     * 
+     *
+     * @param string $id
+     * @param string $type
+     *
      * @return string
      */
-    public function encodeHashidsWithType($id, $type) {
+    public function encodeHashidsWithType($id, $type)
+    {
         $salt = str_replace('resource', $type, env('HASHIDS_SALT'));
         return $this->encodeHashidsWithSalt($id, $salt);
     }
 
     /**
      * Codifica o Hashids informado de acordo com determinado salt.
-     * 
-     * @param string $id 
-     * @param string $salt 
-     * 
+     *
+     * @param string $id
+     * @param string $salt
+     *
      * @return string
      */
-    public function encodeHashidsWithSalt($id, $salt) {
+    public function encodeHashidsWithSalt($id, $salt)
+    {
         // salva hashids atual
         // modifica o salt
         // e inicializa um novo hashids
@@ -155,12 +161,13 @@ trait HashidsTrait
 
     /**
      * Retorna configuração do Hashids.
-     * 
-     * @param string $key 
-     * 
+     *
+     * @param string $key
+     *
      * @return mixed
      */
-    private function getHashidsConfig($key) {
+    private function getHashidsConfig($key)
+    {
         // obtém o valor da key através da configuração do ambiente
         $value = env('HASHIDS_'.strtoupper($key));
         // se a key já existir na configuração do hashid, despreza o valor do ambiente e utiliza o já existente

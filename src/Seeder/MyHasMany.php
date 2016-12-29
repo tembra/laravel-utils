@@ -15,7 +15,7 @@ class MyHasMany
      * Obtém o relacionamento de determinada classe.
      *
      * @param  array  $relations
-     * 
+     *
      * @return void
      */
     public function __construct(array $relations = null)
@@ -27,7 +27,7 @@ class MyHasMany
      * Obtém o relacionamento de determinada classe.
      *
      * @param  string  $class
-     * 
+     *
      * @return string|null
      */
     private function getRelation($class)
@@ -41,7 +41,7 @@ class MyHasMany
      * @param  string  $class
      * @param  \Illuminate\Database\Eloquent\Model  $obj
      * @param  \Illuminate\Database\Eloquent\Model  $relObj
-     * 
+     *
      * @return void
      */
     public function createMany($class, $obj, $relObj = null)

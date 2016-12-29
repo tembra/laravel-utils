@@ -19,7 +19,7 @@ trait TestTrait
      *
      * @param array $rules
      * @param array $resourceData
-     * 
+     *
      * @return void
      */
     protected function assertValidArray(array $rules, array $resourceData)
@@ -37,7 +37,7 @@ trait TestTrait
      *
      * @param array $rules
      * @param array $resourceData
-     * 
+     *
      * @return void
      */
     protected function validateArray($rules, $resourceData)

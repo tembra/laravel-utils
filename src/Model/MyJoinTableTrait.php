@@ -6,7 +6,7 @@ trait MyJoinTableTrait
 {
     /**
      * Efetua join na query com os dados informados.
-     * 
+     *
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param string $table
      * @param string $one
@@ -14,7 +14,7 @@ trait MyJoinTableTrait
      * @param string $two
      * @param string $type
      * @param string $where
-     * 
+     *
      * @return \Illuminate\Database\Query\Builder
      */
     protected function myJoinTable($query, $table, $one, $operator, $two, $type = 'inner', $where = false)
@@ -33,5 +33,4 @@ trait MyJoinTableTrait
         // efetua o join na query
         return $query->join($table, $one, $operator, $two, $type, $where);
     }
-
 }
